@@ -1,0 +1,8 @@
+{
+  "name": "test-gh-actions",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo Tests passed",
+    "lint": "echo Lint OK"
+  }
+}
