@@ -9,7 +9,7 @@ reusable pipeline, pinned to a commit SHA:
 ```yaml
 jobs:
   pipeline:
-    uses: docaohieu2808/reusable-workflows/.github/workflows/auto-pipeline.yml@8ba3a42948ae42fd413647765bdf124c82bb8479 # v2.0.0
+    uses: docaohieu2808/reusable-workflows/.github/workflows/auto-pipeline.yml@879b76e3e519725f0bfaea657865182b72addf4f # v2.0.1
 ```
 
 The pipeline detects Node from `package.json`, installs from the lockfile, runs the tests (`node --test`), and
