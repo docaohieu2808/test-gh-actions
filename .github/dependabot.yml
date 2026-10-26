@@ -1,0 +1,7 @@
+# Moves the pinned reusable-workflows SHA (and any other action) forward weekly.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

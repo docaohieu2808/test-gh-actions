@@ -1,31 +1,27 @@
 # test-gh-actions
 
-**Tier:** GitHub Actions L1 — consumer tối giản của reusable-workflows.
+[![CI](https://github.com/docaohieu2808/test-gh-actions/actions/workflows/ci.yml/badge.svg)](https://github.com/docaohieu2808/test-gh-actions/actions/workflows/ci.yml)
 
-**Vị trí trong learning path:**
-```
-test-gh-actions (L1) → gh-actions-test-express (L1.5) → reusable-workflows (L5-6)
-```
-
-## Mục đích
-
-Test fixture: repo 2 file (`package.json` + `.github/workflows/ci.yml`) dùng để smoke-test reusable-workflows. Mỗi khi thay đổi reusable-workflows, repo này chạy CI để xác nhận không vỡ caller.
-
-## Cách dùng
+Level 1 of the GitHub Actions track: the smallest real consumer of
+[reusable-workflows](https://github.com/docaohieu2808/reusable-workflows). The entire CI is one job that calls the
+reusable pipeline, pinned to a commit SHA:
 
 ```yaml
-# .github/workflows/ci.yml — toàn bộ nội dung
 jobs:
   pipeline:
-    uses: docaohieu2808/reusable-workflows/.github/workflows/auto-pipeline.yml@master
-    secrets:
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+    uses: docaohieu2808/reusable-workflows/.github/workflows/auto-pipeline.yml@8ba3a42948ae42fd413647765bdf124c82bb8479 # v2.0.0
 ```
 
-Không cần config thêm. Auto-detect Node.js từ `package.json`, chạy build + test + lint + security scan.
+The pipeline detects Node from `package.json`, installs from the lockfile, runs the tests (`node --test`), and
+scans dependencies and the working tree for secrets. The project is a tiny module with two real tests, so a broken
+change turns CI red.
 
-## Demo points (interview)
+Track: `test-gh-actions` (L1, a caller) → `gh-actions-test-express` (L1.5, a real-world project as caller) →
+`reusable-workflows` (L5–6, the pipeline itself).
 
-- Minh hoạ DRY: 6 dòng YAML thay thế 200+ dòng pipeline — đây là điểm mạnh của reusable workflow pattern
-- So sánh được với `include:` của GitLab CI và shared library của Jenkins
+What it teaches: the reusable-workflow pattern (one line instead of a copied pipeline), pinning a shared workflow by
+SHA so it cannot change under you, explicit permissions, and letting Dependabot move the pin.
+
+Run locally: `npm test`.
+
+MIT, see [LICENSE](LICENSE).

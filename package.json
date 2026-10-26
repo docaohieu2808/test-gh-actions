@@ -1,8 +1,11 @@
 {
   "name": "test-gh-actions",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Minimal consumer of docaohieu2808/reusable-workflows",
+  "main": "index.js",
+  "engines": { "node": ">=24" },
   "scripts": {
-    "test": "echo Tests passed",
-    "lint": "echo Lint OK"
+    "test": "node --test"
   }
 }
